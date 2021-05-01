@@ -14,31 +14,25 @@
 #  Related Topics 数组 哈希表 
 #  👍 9895 👎 0
 
-
-# leetcode submit region begin(Prohibit modification and deletion)
 class Solution:
+    # 第一种暴力破解
     def twoSum(self, nums: [int], target: int) -> [int]:
-        # 最优解 hash_dict
-        hash_dict = {}
-        for key, value in enumerate(nums):
-            another_value = target - value
-            if another_value not in hash_dict:
-                hash_dict[value] = key
-            else:
-                return [hash_dict[another_value], key]
+        position = len(nums) - 1
+        for i in range(position):
+            for j in range(i + 1, position + 1):
+                if nums[i] + nums[j] == target:
+                    return i, j
 
-    # def twoSum_01(self, nums: [int], target: int) -> [int]:
-    #     # 不是最优解
-    #     for key, value in enumerate(nums):
-    #         another_value = target - value
-    #         rest_nums = nums[key + 1:]
-    #         if another_value in rest_nums:  # 判断另一个数是否在剩下的列表中
-    #             return [key, key + 1 + rest_nums.index(another_value)]
-
-
-# leetcode submit region end(Prohibit modification and deletion)
+    # 第二种hash table 空间换时间
+    def twoSum_1(self, nums: [int], target: int) -> [int]:
+        hash_table = {value: key for key, value in enumerate(nums)}
+        for key1, value in enumerate(nums):
+            diff = target - value
+            key2 = hash_table.get(diff)
+            if key2 and key1 != key2:
+                return key1, key2
 
 
 if __name__ == '__main__':
-    print(Solution().twoSum([2, 7, 11, 15], 9))
-    # print(Solution().twoSum([3, 3], 6))
+    print(Solution().twoSum_1([1, 3, 4, 2], 6))
+    # print(Solution().twoSum_1([3, 3], 6))
