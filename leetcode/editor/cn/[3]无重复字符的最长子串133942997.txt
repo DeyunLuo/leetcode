@@ -1,0 +1,23 @@
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        result_dict = {}
+        lst = 0
+        for key, value in enumerate(s):
+            if not result_dict.get(value):
+                result_dict[value] = 1
+                lst += 1
+            else:
+                if (len(s) - key) > lst:
+                    del result_dict
+                    result_dict = {value: 1}
+                    lst = 1
+        # print(lst)
+        return lst
+
+
+
+# total_testcases:987
+# total_correct:191
+# input_formatted:"ohomm"
+# expected_output:3
+# code_output:2

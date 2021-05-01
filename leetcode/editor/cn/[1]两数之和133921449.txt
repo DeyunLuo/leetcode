@@ -1,0 +1,15 @@
+class Solution:
+    def twoSum(self, nums: [int], target: int) -> [int]:
+        for key, value in enumerate(nums):
+            another_value = target - value
+            if another_value in nums[key + 1:]:  # 判断另一个数是否在剩下的列表中
+                return [key, nums.index(another_value)]
+
+
+
+# total_testcases:52
+# total_correct:45
+# input_formatted:[3,3]
+6
+# expected_output:[0,1]
+# code_output:[0,0]
